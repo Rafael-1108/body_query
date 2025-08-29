@@ -1,0 +1,26 @@
+{
+  "name": "body_query",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "cls & nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rafael-1108/body_query.git"
+  },
+  "keywords": ["server", "body query", "SENAI"],
+  "author": "Rafael Santos",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Rafael-1108/body_query/issues"
+  },
+  "homepage": "https://github.com/Rafael-1108/body_query#readme",
+  "description": "",
+  "dependencies": {
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "nodemon": "^3.1.10"
+  }
+}
