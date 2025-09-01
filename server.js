@@ -15,7 +15,7 @@ app.get("/", (req, res) => {
 });
 
 app.get('/bruxos', (req, res) => {
-    const { casa, ano, especialidade, nome } = req.query;
+    const { casa, ano, especialidade, nome, } = req.query;
     let resultado = bruxos;
   
     if (casa) {
@@ -55,6 +55,7 @@ app.post("/bruxos", (req, res) => {
     const novoBruxo = {
         id: bruxos.length + 1,
         nome,
+        casa: casa,
         ano: parseInt(ano),
         varinha: varinha || "Ainda não definida",
         mascote: mascote || "Ainda não definido",
@@ -70,6 +71,24 @@ app.post("/bruxos", (req, res) => {
         message: "Novo bruxo adicionado a Hogwarts",
         data: novoBruxo
     });
+});
+
+app.get("/varinhas", (req, res) => {
+  const { material, nucleo } = req.query;
+  let resultado = varinhas;
+
+  if (nucleo) {
+    resultado = resultado.filter(n => n.nucleo.toLowerCase() === nucleo.toLowerCase());
+  }
+
+  if (material) {
+    resultado = resultado.filter (m => m.material.toLowerCase() === material.toLowerCase());
+  }
+  
+  res.status(200).json({
+    total: resultado.length,
+    data: resultado
+  });
 });
 
 app.listen(serverPort, () => {
