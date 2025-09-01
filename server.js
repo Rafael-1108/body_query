@@ -91,6 +91,24 @@ app.get("/varinhas", (req, res) => {
   });
 });
 
+app.get("/pocoes", (req, res) => {
+  const { nome, efeito } = req.query;
+  let resultado = pocoes;
+
+  if (nome) {
+    resultado = resultado.filter(n => n.nome.toLowerCase() === nome.toLowerCase());
+  }
+
+  if (efeito) {
+    resultado = resultado.filter (e => e.efeito.toLowerCase() === efeito.toLowerCase());
+  }
+  
+  res.status(200).json({
+    total: resultado.length,
+    data: resultado
+  });
+});
+
 app.listen(serverPort, () => {
     console.log(`🚀 Servidor rodando em http://localhost:${serverPort} 🚀`);
 });
