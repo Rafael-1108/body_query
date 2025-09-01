@@ -109,6 +109,24 @@ app.get("/pocoes", (req, res) => {
   });
 });
 
+app.get("/animais", (req, res) => {
+  const { nome, tipo } = req.query;
+  let resultado = animais;
+
+  if (nome) {
+    resultado = resultado.filter(n => n.nome.toLowerCase() === nome.toLowerCase());
+  }
+
+  if (tipo) {
+    resultado = resultado.filter (t => t.tipo.toLowerCase() === tipo.toLowerCase());
+  }
+  
+  res.status(200).json({
+    total: resultado.length,
+    data: resultado
+  });
+});
+
 app.listen(serverPort, () => {
     console.log(`🚀 Servidor rodando em http://localhost:${serverPort} 🚀`);
 });
