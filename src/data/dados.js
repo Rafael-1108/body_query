@@ -64,8 +64,8 @@ const casas = [
 ];
 
 const varinhas = [
-    { id: 1, material: "Azevinho", nucleo: "Pena de Fênix", comprimento: "28cm" },
-    { id: 2, material: "Videira", nucleo: "Fibra de Coração de Dragão", comprimento: "27cm" },
+    { id: 1, material: "Salgueiro", nucleo: "Pena de Fênix", comprimento: "28cm" },
+    { id: 2, material: "Salgueiro", nucleo: "Fibra de Coração de Dragão", comprimento: "27cm" },
     { id: 3, material: "Salgueiro", nucleo: "Pelo de Unicórnio", comprimento: "35cm" },
     { id: 4, material: "Carvalho Inglês", nucleo: "Pelo de Testrálio", comprimento: "32cm" }
 ];

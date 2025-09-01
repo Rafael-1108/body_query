@@ -155,6 +155,50 @@ app.post("/varinhas", (req, res) => {
   });
 });
 
+app.get("/stats", (req, res) => {
+  const { casa } = req.query;
+  let resultado = bruxos;
+
+  if (casa) {
+    resultado = resultado.filter((s) => s.casa.toLowerCase().includes(casa.toLowerCase()));
+  }
+
+  res.status(200).json ({
+    total: resultado.length,
+    casa,
+  })
+
+const contagem = {};
+
+for (let i = 0; i < varinhas.length; i++) {
+  const varinha = varinhas[i];
+  const material = varinha.material;
+
+  if (contagem[material]) {
+    contagem[material]++;
+  } else {
+    contagem[material] = 1;
+  }
+}
+
+let materialMaisFrequente;
+let contagemMaxima = 0;
+
+for (const material in contagemMateriais) {
+
+  if (contagem[material] > contagemMaxima) {
+    contagemMaxima = contagemMateriais[material];
+    materialMaisFrequente = material;
+  }
+}
+
+if (contagemMateriais) {
+  res.status(200).json({
+    resultado: `O material mais usado é ${materialMaisFrequente}`
+  })
+}
+});
+
 app.listen(serverPort, () => {
     console.log(`🚀 Servidor rodando em http://localhost:${serverPort} 🚀`);
 });
