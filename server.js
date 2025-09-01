@@ -157,16 +157,12 @@ app.post("/varinhas", (req, res) => {
 
 app.get("/stats", (req, res) => {
   const { casa } = req.query;
-  let resultado = bruxos;
+  let resultadoBruxos = bruxos;
 
   if (casa) {
-    resultado = resultado.filter((s) => s.casa.toLowerCase().includes(casa.toLowerCase()));
+    resultadoBruxos = resultadoBruxos.filter((s) => s.casa.toLowerCase().includes(casa.toLowerCase())
+    );
   }
-
-  res.status(200).json ({
-    total: resultado.length,
-    casa,
-  })
 
 const contagem = {};
 
@@ -181,22 +177,26 @@ for (let i = 0; i < varinhas.length; i++) {
   }
 }
 
-let materialMaisFrequente;
+let materialMaisFrequente = null;
 let contagemMaxima = 0;
 
-for (const material in contagemMateriais) {
-
+for (const material in contagem) {
   if (contagem[material] > contagemMaxima) {
-    contagemMaxima = contagemMateriais[material];
+    contagemMaxima = contagem[material];
     materialMaisFrequente = material;
   }
 }
 
-if (contagemMateriais) {
   res.status(200).json({
-    resultado: `O material mais usado é ${materialMaisFrequente}`
-  })
-}
+    bruxos: {
+      total: resultadoBruxos.length,
+      casa: casa,
+},
+  varinhas: {
+    materialMaisFrequente: materialMaisFrequente,
+    contagemMaxima: contagemMaxima,
+  },
+});
 });
 
 app.listen(serverPort, () => {
