@@ -127,6 +127,34 @@ app.get("/animais", (req, res) => {
   });
 });
 
+app.post("/varinhas", (req, res) => {
+  const { material, comprimento, nucleo } = req.body;
+
+  console.log("Dados recebidos:", req.body);
+
+  if (!material || !comprimento || !nucleo ) {
+      return res.status(400).json({
+          success: false,
+          message: "Material, comprimento e núcleo são obrigatórios para uma varinha!"
+      });
+  };
+
+  const novaVarinha = {
+      id: varinhas.length + 1,
+      comprimento: parseInt(comprimento),
+      nucleo: nucleo,
+      material: material
+  };
+
+  varinhas.push(novaVarinha);
+
+  res.status(201).json({
+      success: true,
+      message: "Nova varinha adicionada",
+      data: novaVarinha
+  });
+});
+
 app.listen(serverPort, () => {
     console.log(`🚀 Servidor rodando em http://localhost:${serverPort} 🚀`);
 });
